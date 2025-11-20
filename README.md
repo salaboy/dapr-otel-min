@@ -33,7 +33,7 @@ http POST :8080/<INSTANCE-ID>/sad
 
 ## Bulding dependencies until all this work is upstream
 
-```java
+```sh
 git clone https://github.com/salaboy/durabletask-java
 ```
 
@@ -46,3 +46,18 @@ cd client/
 ../gradlew build
 ../gradlew publishToMavenLocal
 ```
+
+Then
+
+Clone: 
+
+```sh
+git clone https://github.com/salaboy/java-sdk.git
+```
+
+Switch to branch `micrometer`:
+
+```
+./mvnw clean install -DskipTests
+```
+
