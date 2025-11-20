@@ -1,0 +1,55 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 10s
+    send_batch_size: 1024
+
+  resource:
+    attributes:
+      - key: deployment.environment
+        value: local
+        action: insert
+      - key: service.namespace
+        value: pizza-store-local
+        action: insert
+
+exporters:
+  otlp/dash0:
+    endpoint: ${DASH0_ENDPOINT_OTLP_GRPC_HOSTNAME}:${DASH0_ENDPOINT_OTLP_GRPC_PORT}
+    headers:
+      Authorization: Bearer ${DASH0_AUTH_TOKEN}
+    tls:
+      insecure: false
+
+  # Optional: log traces to console for debugging
+  debug:
+    verbosity: detailed
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch, resource]
+      exporters: [otlp/dash0, debug]
+
+    metrics:
+      receivers: [otlp]
+      processors: [batch, resource]
+      exporters: [otlp/dash0]
+
+    logs:
+      receivers: [otlp]
+      processors: [batch, resource]
+      exporters: [otlp/dash0]
