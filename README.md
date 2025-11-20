@@ -30,3 +30,19 @@ With Event Payload `sad` the workflow will complete:
 http POST :8080/<INSTANCE-ID>/sad
 ```
 
+
+## Bulding dependencies until all this work is upstream
+
+```java
+git clone https://github.com/salaboy/durabletask-java
+```
+
+Switch to branch: `trace-context`
+
+Build and publish to local maven repo: 
+
+```
+cd client/
+../gradlew build
+../gradlew publishToMavenLocal
+```
