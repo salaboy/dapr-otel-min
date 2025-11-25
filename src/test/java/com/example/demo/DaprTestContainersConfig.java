@@ -1,5 +1,7 @@
 package com.example.demo;
 
+//import io.arconia.dev.services.opentelemetry.OpenTelemetryDevServicesProperties;
+//import io.arconia.dev.services.lgtm.LgtmDevServicesProperties;
 import io.arconia.dev.services.opentelemetry.OpenTelemetryDevServicesProperties;
 import io.dapr.testcontainers.Component;
 import io.dapr.testcontainers.Configuration;
@@ -73,18 +75,12 @@ public class DaprTestContainersConfig {
         .withReuse(properties.getShared().asBoolean());
   }
 
-//  @Bean
-//  @ServiceConnection
-//  GenericContainer collectorContainer(Network network) {
-//
-//    return new GenericContainer(DockerImageName.parse("otel/opentelemetry-collector-contrib:0.126.0"))
-//        .withNetwork(network)
-//        .withExposedPorts(4317, 4318)
-//        .withNetworkAliases("collector");
-//  }
 
 
-  private DockerImageName daprImage = DockerImageName.parse("docker.io/joshdiagrid/daprd-trace:one").asCompatibleSubstituteFor("daprio/daprd:1.16.0-rc.5");
+  //private DockerImageName daprImage = DockerImageName.parse("docker.io/joshdiagrid/daprd-trace:one").asCompatibleSubstituteFor("daprio/daprd:1.16.0-rc.5");
+
+  //private DockerImageName daprImage = DockerImageName.parse("salaboy/dapr:dev-linux-arm64").asCompatibleSubstituteFor("daprio/daprd:1.16.0-rc.5");
+  private DockerImageName daprImage = DockerImageName.parse("kaspernissen/daprd:v2.0-linux-arm64").asCompatibleSubstituteFor("daprio/daprd:1.16.0-rc.5");
 
   @Bean
   @ServiceConnection
